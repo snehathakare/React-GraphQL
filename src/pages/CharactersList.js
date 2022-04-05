@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import './list.css'
 import {
   useQuery,
   gql
@@ -11,19 +12,25 @@ query{
         name
         id
         gender
-      
+        image
       }
     }
   }`
 
-
-
 const CharactersList = () => {
-  const obj = useQuery(RESULT_QUERY)
-  console.log({ obj })
-  return (
-    <div>
+  const { loading, error, data } = useQuery(RESULT_QUERY)
 
+  if (loading) return "Loading...";
+  if (error) return <pre>{error.message}</pre>
+
+  return (
+    <div className="container card-list">
+      {data.characters.results.map((char) => (
+        <div>
+          <img src={char.image} />
+          <h5>{char.name}</h5>
+        </div>
+      ))}
     </div>
   )
 }
