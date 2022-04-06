@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './list.css'
-import {
-  useQuery,
-  gql
-} from "@apollo/client";
+import useCharacters from './../hooks/useCharacters'
 
-const RESULT_QUERY = gql`
-query{
-    characters{
-      results{
-        name
-        id
-        gender
-        image
-      }
-    }
-  }`
 
 const CharactersList = () => {
-  const { loading, error, data } = useQuery(RESULT_QUERY)
+  const { loading, error, data } = useCharacters()
 
   if (loading) return "Loading...";
   if (error) return <pre>{error.message}</pre>
 
   return (
-    <div className="container card-list">
+    <div className="card-list">
       {data.characters.results.map((char) => (
-        <div>
+        <div key={char.id}>
           <img src={char.image} />
           <h5>{char.name}</h5>
         </div>
