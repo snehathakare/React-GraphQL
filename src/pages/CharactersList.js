@@ -13,7 +13,7 @@ const CharactersList = () => {
     <div className="card-list">
       {data.characters.results.map((char) => (
         <div key={char.id}>
-          <img src={char.image} />
+          <img src={char.image} alt="characters" />
           <h5>{char.name}</h5>
         </div>
       ))}

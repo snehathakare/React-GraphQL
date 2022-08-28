@@ -1,12 +1,15 @@
 import './App.css';
 import CharactersList from './pages/CharactersList'
-import './App.css'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
-      <h3>React + GraphQL + Apollo Client</h3>
-      <CharactersList />
+      <Routes>
+        <Route path="/" element={<CharactersList />} />
+      </Routes>
+
+
     </div>
   );
 }
